@@ -1,27 +1,20 @@
 import express from 'express';
-
+import {
+    paginaInicio,
+    paginaRecetas,
+    paginaReceta,
+    paginaNuevaReceta
+} from '../controller/paginasController.js';
+import {
+    guardarReceta
+} from '../controller/recetasController.js';
 
 const router = express.Router();
 
-router.get('/', (req,res) => {
-    res.render('inicio', {
-        pagina: 'Inicio'
-    });
-});
-router.get('/recetas', (req,res) => {
-    res.render('recetas', {
-        pagina: 'recetas'
-    });
-});
-router.get('/receta', (req,res) => {
-    res.render('receta', {
-        pagina: 'Receta'
-    });
-});
-router.get('/nueva_receta', (req,res) => {
-    res.render('nueva_receta', {
-        pagina: 'Nueva receta'
-    });
-});
+router.get('/', paginaInicio);
+router.get('/recetas', paginaRecetas);
+router.get('/receta', paginaReceta);
+router.get('/nueva_receta', paginaNuevaReceta);
+router.post('/nueva_receta', guardarReceta )
 
 export default router;

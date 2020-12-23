@@ -8,14 +8,43 @@ block contenido
     .container
         p.center-align Ingrese los datos de la nueva receta
 
+        if(errores)
+            each error in errores
+                .card-panel.red.lighten-3
+                    p.center-align.m0= error.mensaje
+
+
         .row
-            form.col.s12(action="POST")
+            form.col.s12(action="/nueva_receta", method="POST")
                 .row
                     .input-field.col.s6
-                        input#first_name(type="text")
-                        label(for="first_name") First Name
+                        input#sender_name(type="text", name="sender_name", value=sender_name)
+                        label(for="sender_name") Nombre
                     .input-field.col.s6
-                        input#last_name(type="text")
-                        label(for="last_name") Last Name
-                    
+                        input#sender_last_name(type="text", name="sender_last_name", value=sender_last_name)
+                        label(for="sender_last_name") Apellido
+                    .input-field.col.s12.l6
+                        input#sender_email(type="text", name="sender_email", value=sender_email)
+                        label(for="sender_email") Correo Electronico
+                    .input-field.col.s8
+                        input#name_recipe(type="text", name="name_recipe", value=name_recipe)
+                        label(for="name_recipe") Nombre de la receta
+                    .input-field.col.s4
+                        select#difficult_recipe(name="difficult_recipe")
+                            option(value="Facil" ) Amateur
+                            option(value="Intermediario") Intermediario
+                            option(value="Experto") Experto
+                        label Dificultad
+                    .input-field.col.s12
+                        textarea#steps_recipe.materialize-textarea(name="steps_recipe", cols="30", rows="10") #{steps_recipe}
+                        label(for="steps_recipe") Ingredientes e instrucciones
+                    .col.s12
+                        p Imagenes
+                        input#files(type="file", name="files")
+                    .col.s12.mt10
+                        button.btn.waves-effect.waves-light.btn-large.light-green.darken-3.right(type='submit')
+                            | Guardar
+                            i.material-icons.right send
+    
+
                     

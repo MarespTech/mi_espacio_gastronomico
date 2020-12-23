@@ -1,7 +1,23 @@
 extends ./layout/index
 
 block slider
-    h3 Recetas
+    .container
+        h3 Recetas
 
 block contenido
-    p.align-center Recetas
+    .container
+        .row
+            each receta in recetas
+                .col.s6.l4.mb5
+                    .card
+                        .card-image
+                            img(src='img/comida.jpeg')
+                        .card-content
+                            span.card-title #{receta.name_recipe} 
+                            p Dificultad: #{receta.difficult_recipe}
+                            small.right Hecho por: #{receta.sender_name} #{receta.sender_last_name}
+                            
+                        .card-action
+                            a(href='#') Ver receta completa
+
+    
