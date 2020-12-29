@@ -1,4 +1,15 @@
 extends ./layout/index
 
 block slider
-    p Hola desde receta
+    h3.center.mt15.mb20= receta.name_recipe
+
+    .container
+        .row
+            .col.sm4.l6.picture_recipe
+                img(src=`/${receta.principal_picture}`, alt="picture")
+            .col.sm8.l6
+                p #{receta.description_recipe.replace('\r\n', '<br>')}
+                br
+                p #{JSON.stringify(ingredientes)}
+                br
+                p #{JSON.stringify(instrucciones)}

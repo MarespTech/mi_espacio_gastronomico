@@ -1,15 +1,24 @@
 import { Recipes } from '../models/Recipes.js';
+import {
+    guardarIngredientes
+} from '../controller/ingredientesController.js';
+import {
+    guardarInstrucciones
+} from '../controller/instruccionesController.js';
 
-const guardarReceta = async(req, res) => {
-    const { name_recipe, sender_name, sender_last_name, sender_email, steps_recipe, difficult_recipe, files  } = req.body;
+const guardarReceta = async(req, res, next) => {
+
+    const { name_recipe, sender_name, sender_last_name, sender_email, description_recipe, difficult_recipe, ingredientes, instrucciones  } = req.body;
+    const file = req.file;
     const errores = [];
 
-    console.log(req.body);
+    let principal_picture = file ? `uploads/${file.filename}` : 'public/uploads/no-image.jpeg';
+
     if(name_recipe.trim() === "") errores.push({ mensaje: 'El nombre de la receta esta vacio'});
     if(sender_name.trim() === "") errores.push({ mensaje: 'Su nombre esta vacio'});
     if(sender_last_name.trim() === "") errores.push({ mensaje: 'Su apellido esta vacio'});
     if(sender_email.trim() === "") errores.push({ mensaje: 'Su correo electronico esta vacio'});
-    if(steps_recipe.trim() === "") errores.push({ mensaje: 'Las instrucciones estan vacio'});
+    if(description_recipe.trim() === "") errores.push({ mensaje: 'Las instrucciones estan vacio'});
 
     if( errores.length > 0 ) {
         // Mostrar formulario con errores
@@ -20,21 +29,29 @@ const guardarReceta = async(req, res) => {
             sender_name, 
             sender_last_name, 
             sender_email, 
-            steps_recipe, 
-            difficult_recipe
+            description_recipe, 
+            difficult_recipe,
+            principal_picture
         });
     } 
     else {
+        let url_recipe = name_recipe.replace(" ", "-");
         try {
             await Recipes.create({
                 name_recipe, 
                 sender_name, 
                 sender_last_name, 
                 sender_email, 
-                steps_recipe, 
-                difficult_recipe
+                description_recipe, 
+                difficult_recipe,
+                principal_picture,
+                url_recipe
             })
-            // .then(result => console.log(result));
+            .then(result => 
+                {
+                    guardarIngredientes(ingredientes, result.dataValues.id);
+                    guardarInstrucciones(instrucciones, result.dataValues.id);
+                });
 
             res.redirect('/');
             

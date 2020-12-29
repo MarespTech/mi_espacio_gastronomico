@@ -19,10 +19,16 @@ export const Recipes = db.define('recetas', {
     sender_email: {
         type: Sequelize.STRING
     },
-    steps_recipe: {
+    description_recipe: {
         type: Sequelize.STRING
     },
     difficult_recipe: {
+        type: Sequelize.STRING
+    },
+    principal_picture: {
+        type: Sequelize.STRING
+    },
+    url_recipe: {
         type: Sequelize.STRING
     }
 });

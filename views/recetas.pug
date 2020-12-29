@@ -11,13 +11,13 @@ block contenido
                 .col.s6.l4.mb5
                     .card
                         .card-image
-                            img(src='img/comida.jpeg')
+                            img(src=`${receta.principal_picture}`)
                         .card-content
                             span.card-title #{receta.name_recipe} 
                             p Dificultad: #{receta.difficult_recipe}
                             small.right Hecho por: #{receta.sender_name} #{receta.sender_last_name}
                             
                         .card-action
-                            a(href='#') Ver receta completa
+                            a(href=`recetas/${receta.url_recipe}`) Ver receta completa
 
     

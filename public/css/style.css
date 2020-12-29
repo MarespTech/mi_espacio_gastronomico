@@ -256,3 +256,7 @@ label {
 	color: #000!important;
 }
 
+
+.picture_recipe img{
+	width: 100%;
+}
