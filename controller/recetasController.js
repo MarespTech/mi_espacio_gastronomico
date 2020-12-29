@@ -12,6 +12,9 @@ const guardarReceta = async(req, res, next) => {
     const file = req.file;
     const errores = [];
 
+    console.log(req.body)
+    console.log(file);
+
     let principal_picture = file ? `uploads/${file.filename}` : 'public/uploads/no-image.jpeg';
 
     if(name_recipe.trim() === "") errores.push({ mensaje: 'El nombre de la receta esta vacio'});
