@@ -41,23 +41,25 @@ block contenido
                         p Imagen
                         input#file(type="file", name="file")
                     
-                    h5.col.s12.mt20 Ingredientes:
-                    .col.s6
-                        a#agregar_ing.btn.red.darken-3.waves-effect.waves-light(href="#", style="font-weight:bold; font-size:20px") +
-                        ul#lista_ingredientes_input
-                            li
-                                .input-field
-                                    input.ingredientes(type="text", name="ingredientes", id=`ingredientes`)
-                                    label(for=`ingredientes`) Ingrediente
+                    .col.s12.l6
+                        h5.col.s12.mt20 Ingredientes:
+                        .col.s12
+                            a#agregar_ing.btn.red.darken-3.waves-effect.waves-light(href="#", style="font-weight:bold; font-size:20px") +
+                            ul#lista_ingredientes_input
+                                li
+                                    .input-field
+                                        input.ingredientes(type="text", name="ingredientes", id=`ingredientes`)
+                                        label(for=`ingredientes`) Ingrediente
                     
-                    h5.col.s12.mt20 Instrucciones:
-                    .col.s6
-                        a#agregar_inst.btn.red.darken-3.waves-effect.waves-light(href="#", style="font-weight:bold; font-size:20px") +
-                        ul#lista_instrucciones_input
-                            li
-                                .input-field
-                                    input.instrucciones(type="text", name="instrucciones", id=`instrucciones`)
-                                    label(for=`instrucciones`) Instruccion
+                    .col.s12.l6
+                        h5.col.s12.mt20 Instrucciones:
+                        .col.s12
+                            a#agregar_inst.btn.red.darken-3.waves-effect.waves-light(href="#", style="font-weight:bold; font-size:20px") +
+                            ul#lista_instrucciones_input
+                                li
+                                    .input-field
+                                        input.instrucciones(type="text", name="instrucciones", id=`instrucciones`)
+                                        label(for=`instrucciones`) Instruccion
 
 
                     .col.s12.mt10

@@ -257,6 +257,12 @@ label {
 }
 
 
+/*---------- RECIPE PAGE ----------*/
 .picture_recipe img{
 	width: 100%;
 }
+
+.title {
+	font-size: 1.5rem;
+}
+

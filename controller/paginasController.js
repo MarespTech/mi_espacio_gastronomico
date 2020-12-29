@@ -27,18 +27,17 @@ const paginaReceta = async(req, res) => {
 
         promiseDB.push(Ingredientes.findAll({ where: {receta_id: receta.id}}));
         promiseDB.push(Instrucciones.findAll({ where: {receta_id: receta.id}}));
-        const resultado = await Promise.all(promiseDB);    
+        const resultado = await Promise.all(promiseDB);   
         
+        res.render('receta', {
+            pagina: 'Receta',
+            receta,
+            ingredientes: resultado[0],
+            instrucciones: resultado[1]
+        });
     } catch (error) {
         console.log(error);
     }
-    
-    res.render('receta', {
-        pagina: 'Receta',
-        receta,
-        ingredientes: resultado[0],
-        instrucciones: resultado[1]
-    });
 }
 
 const paginaNuevaReceta = (req, res) => {
