@@ -2,31 +2,31 @@ extends ./layout/index
 
 block slider
     .container
-        h3 Nueva receta
+        h3 Editar receta
 
 block contenido
     .container
-        p.center-align Ingrese los datos de la nueva receta
-
+        .center
+            img(src=`/${receta.principal_picture}`, alt="picture")
         if(errores)
             each error in errores
                 .card-panel.red.lighten-3
                     p.center-align.m0= error.mensaje
 
         .row
-            form.col.s12(action="/nueva_receta", method="POST", enctype="multipart/form-data")
+            form.col.s12(action="/editar_receta", method="POST", enctype="multipart/form-data")
                 .row
                     .input-field.col.s6
-                        input#sender_name(type="text", name="sender_name", value=sender_name)
+                        input#sender_name(type="text", name="sender_name", value=receta.sender_name)
                         label(for="sender_name") Nombre
                     .input-field.col.s6
-                        input#sender_last_name(type="text", name="sender_last_name", value=sender_last_name)
+                        input#sender_last_name(type="text", name="sender_last_name", value=receta.sender_last_name)
                         label(for="sender_last_name") Apellido
                     .input-field.col.s12.l6
-                        input#sender_email(type="text", name="sender_email", value=sender_email)
+                        input#sender_email(type="text", name="sender_email", value=receta.sender_email)
                         label(for="sender_email") Correo Electronico
                     .input-field.col.s8
-                        input#name_recipe(type="text", name="name_recipe", value=name_recipe)
+                        input#name_recipe(type="text", name="name_recipe", value=receta.name_recipe)
                         label(for="name_recipe") Nombre de la receta
                     .input-field.col.s4
                         select#difficult_recipe(name="difficult_recipe")
@@ -35,7 +35,7 @@ block contenido
                             option(value="Experto") Experto
                         label Dificultad
                     .input-field.col.s12
-                        textarea#description_recipe.materialize-textarea(name="description_recipe", cols="30", rows="10") #{description_recipe}
+                        textarea#description_recipe.materialize-textarea(name="description_recipe", cols="30", rows="10") #{receta.description_recipe}
                         label(for="description_recipe") Descripción
                     .col.s12.mb20
                         p Imagen
@@ -46,16 +46,10 @@ block contenido
                         .col.s12
                             a#agregar_ing.btn.red.darken-3.waves-effect.waves-light(href="#", style="font-weight:bold; font-size:20px") +
                             ul#lista_ingredientes_input
-                                if(ingredientes)
-                                    each ingrediente in ingredientes
-                                        li
-                                            .input-field
-                                                input.ingredientes(type="text", name="ingredientes", id=`ingredientes`, value=ingrediente)
-                                                label(for=`ingredientes`) Ingrediente
-                                else    
+                                each ingrediente in ingredientes
                                     li
                                         .input-field
-                                            input.ingredientes(type="text", name="ingredientes", id=`ingredientes`)
+                                            input.ingredientes(type="text", name="ingredientes", id=`ingredientes`, value=ingrediente.ingrediente)
                                             label(for=`ingredientes`) Ingrediente
                     
                     .col.s12.l6
@@ -63,16 +57,10 @@ block contenido
                         .col.s12
                             a#agregar_inst.btn.red.darken-3.waves-effect.waves-light(href="#", style="font-weight:bold; font-size:20px") +
                             ul#lista_instrucciones_input
-                                if(instrucciones)
-                                    each instruccion in instrucciones
-                                        li
-                                            .input-field
-                                                input.instrucciones(type="text", name="instrucciones", id=`instrucciones`, value=instruccion)
-                                                label(for=`instrucciones`) Instruccion
-                                else
+                                each instruccion in instrucciones
                                     li
                                         .input-field
-                                            input.instrucciones(type="text", name="instrucciones", id=`instrucciones`)
+                                            input.instrucciones(type="text", name="instrucciones", id=`instrucciones`, value=instruccion.instruccion)
                                             label(for=`instrucciones`) Instruccion
 
 

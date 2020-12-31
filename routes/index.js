@@ -3,9 +3,9 @@ import multer from 'multer';
 import path from 'path';
 import {
     paginaInicio,
-    paginaRecetas,
     paginaReceta,
-    paginaNuevaReceta
+    paginaNuevaReceta,
+    paginaEditarReceta
 } from '../controller/paginasController.js';
 import {
     guardarReceta
@@ -24,10 +24,10 @@ const upload = multer({storage: storage});
 const router = express.Router();
 
 router.get('/', paginaInicio);
-router.get('/recetas', paginaRecetas);
 router.get('/recetas/:url', paginaReceta);
 // router.get('/receta', paginaReceta);
 router.get('/nueva_receta', paginaNuevaReceta);
+router.get('/editar_receta/:url', paginaEditarReceta);
 router.post('/nueva_receta', upload.single('file'), guardarReceta )
 
 export default router;

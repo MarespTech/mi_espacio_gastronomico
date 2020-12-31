@@ -24,3 +24,9 @@ block slider
                 b Instrucciones
             each instruccion in instrucciones
                 li= instruccion.instruccion
+
+        .row
+            .right
+                a.waves-effect.waves-light.btn-large.amber.darken-1.mr10(href=`/editar_receta/${receta.url_recipe}`) Editar
+                a.waves-effect.waves-light.btn-large.red.darken-4(id="eliminar_receta", data-id=`${receta.id}`) Eliminar
+                

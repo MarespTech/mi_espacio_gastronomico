@@ -34,7 +34,9 @@ const guardarReceta = async(req, res, next) => {
             sender_email, 
             description_recipe, 
             difficult_recipe,
-            principal_picture
+            principal_picture,
+            ingredientes,
+            instrucciones
         });
     } 
     else {
