@@ -7,7 +7,7 @@ block slider
 block contenido
     .container
         .center
-            img(src=`/${receta.principal_picture}`, alt="picture")
+            img(src=`/${receta.principal_picture}`, alt="picture", width="400", height="300")
         if(errores)
             each error in errores
                 .card-panel.red.lighten-3
@@ -49,7 +49,7 @@ block contenido
                                 each ingrediente in ingredientes
                                     li
                                         .input-field
-                                            input.ingredientes(type="text", name="ingredientes", id=`ingredientes`, value=ingrediente.ingrediente)
+                                            input.ingredientes(type="text", name="ingredientes", id=`ingredientes`, value=ingrediente)
                                             label(for=`ingredientes`) Ingrediente
                     
                     .col.s12.l6
@@ -60,11 +60,14 @@ block contenido
                                 each instruccion in instrucciones
                                     li
                                         .input-field
-                                            input.instrucciones(type="text", name="instrucciones", id=`instrucciones`, value=instruccion.instruccion)
+                                            input.instrucciones(type="text", name="instrucciones", id=`instrucciones`, value=instruccion)
                                             label(for=`instrucciones`) Instruccion
 
 
                     .col.s12.mt10
+                        input#id(type="hidden", name="id" value=receta.id) 
+                        input#url_recipe(type="hidden", name="url_recipe" value=receta.url_recipe) 
+                        input#actual_picture(type="hidden", name="actual_picture" value=receta.principal_picture) 
                         button.btn.waves-effect.waves-light.btn-large.light-green.darken-3.right(type='submit')
                             | Guardar
                             i.material-icons.right send

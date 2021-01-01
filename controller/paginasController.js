@@ -3,7 +3,6 @@ import { Ingredientes } from '../models/Ingredientes.js';
 import { Instrucciones } from '../models/Instrucciones.js';
 
 const paginaInicio = async(req, res) => {
-    
     const recetas = await Recipes.findAll();
 
     res.render('recetas', {
@@ -47,15 +46,39 @@ const paginaEditarReceta = async(req, res) => {
     try {
         const receta = await Recipes.findOne({ where: { url_recipe: url }});
 
-        promiseDB.push(Ingredientes.findAll({ where: {receta_id: receta.id}}));
-        promiseDB.push(Instrucciones.findAll({ where: {receta_id: receta.id}}));
+        promiseDB.push(Ingredientes.findAll({
+                attributes: ['ingrediente']
+            },
+            { 
+                where: {receta_id: receta.id}
+            }
+        ));
+
+        promiseDB.push(Instrucciones.findAll({
+                attributes: ['instruccion']
+            },
+            {  
+                where: {receta_id: receta.id}
+            }
+        ));
         const resultado = await Promise.all(promiseDB);   
         
+        const ingredientes = [];
+        const instrucciones = [];
+
+        resultado[0].forEach(element => {
+            ingredientes.push(element.ingrediente);
+        });
+
+        resultado[1].forEach(element => {
+            instrucciones.push(element.instruccion);
+        });
+
         res.render('editar_receta', {
             pagina: 'Editar receta',
             receta,
-            ingredientes: resultado[0],
-            instrucciones: resultado[1]
+            ingredientes,
+            instrucciones
         });
     } catch (error) {
         console.log(error);

@@ -8,7 +8,8 @@ import {
     paginaEditarReceta
 } from '../controller/paginasController.js';
 import {
-    guardarReceta
+    guardarReceta,
+    editarReceta
 } from '../controller/recetasController.js';
 
 const storage = multer.diskStorage({
@@ -28,6 +29,7 @@ router.get('/recetas/:url', paginaReceta);
 // router.get('/receta', paginaReceta);
 router.get('/nueva_receta', paginaNuevaReceta);
 router.get('/editar_receta/:url', paginaEditarReceta);
-router.post('/nueva_receta', upload.single('file'), guardarReceta )
+router.post('/nueva_receta', upload.single('file'), guardarReceta );
+router.post('/editar_receta', upload.single('file'), editarReceta );
 
 export default router;
