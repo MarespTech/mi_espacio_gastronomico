@@ -42,6 +42,15 @@ const editarIngredientes = async(ingredientes, receta_id) => {
     });
 }
 
+const eliminarIngredientes = async(receta_id) => {
+    await Ingredientes.destroy({
+        where: {
+            receta_id
+        }
+    })
+}
+
 export { guardarIngredientes,
-         editarIngredientes
+         editarIngredientes,
+         eliminarIngredientes
 }

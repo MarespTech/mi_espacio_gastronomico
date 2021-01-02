@@ -1,6 +1,5 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
 import {
     paginaInicio,
     paginaReceta,
@@ -9,7 +8,8 @@ import {
 } from '../controller/paginasController.js';
 import {
     guardarReceta,
-    editarReceta
+    editarReceta,
+    eliminarReceta
 } from '../controller/recetasController.js';
 
 const storage = multer.diskStorage({
@@ -29,6 +29,7 @@ router.get('/recetas/:url', paginaReceta);
 // router.get('/receta', paginaReceta);
 router.get('/nueva_receta', paginaNuevaReceta);
 router.get('/editar_receta/:url', paginaEditarReceta);
+router.get('/eliminar_receta/:id', eliminarReceta);
 router.post('/nueva_receta', upload.single('file'), guardarReceta );
 router.post('/editar_receta', upload.single('file'), editarReceta );
 

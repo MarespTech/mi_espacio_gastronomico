@@ -1,11 +1,13 @@
 import { Recipes } from '../models/Recipes.js';
 import {
     guardarIngredientes,
-    editarIngredientes
+    editarIngredientes,
+    eliminarIngredientes
 } from '../controller/ingredientesController.js';
 import {
     guardarInstrucciones,
-    editarInstrucciones
+    editarInstrucciones,
+    eliminarInstrucciones
 } from '../controller/instruccionesController.js';
 import swal from 'sweetalert';
 
@@ -130,6 +132,22 @@ const editarReceta = async(req, res, next) => {
     }
 }
 
+const eliminarReceta = async(req, res, next) => {
+    const { id } = req.params;
+    await Recipes.destroy({
+        where: {
+            id
+        }
+    })
+    .then( () => {
+        eliminarIngredientes(id);
+        eliminarInstrucciones(id);
+
+        console.log('Receta Eliminada');
+    });
+}
+
 export { guardarReceta,
          editarReceta,
+         eliminarReceta
 }

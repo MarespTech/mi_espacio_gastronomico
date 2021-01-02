@@ -66,13 +66,11 @@ function eliminarReceta(e) {
   .then((willDelete) => {
     if (willDelete) {
       let url = `/eliminar_receta/${id}`;
+      let xmlhttp = new XMLHttpRequest();
 
-
-
-
-      swal("La receta ha sido eliminada..", {
-        icon: "success",
-      });
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+      window.location.href = '/';
     }
   });
 }
