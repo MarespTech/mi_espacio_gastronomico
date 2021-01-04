@@ -40,8 +40,8 @@ const guardarReceta = async(req, res, next) => {
             description_recipe, 
             difficult_recipe,
             principal_picture,
-            ingredientes,
-            instrucciones
+            ingredientes: Array.isArray(ingredientes) ? ingredientes : [ingredientes],
+            instrucciones: Array.isArray(instrucciones) ? instrucciones : [instrucciones]
         });
     } 
     else {
@@ -118,7 +118,7 @@ const editarReceta = async(req, res, next) => {
                     id
                 }
             })
-            .then(result => 
+            .then(() => 
                 {
                     editarIngredientes(Array.isArray(ingredientes) ? ingredientes : [ingredientes], id);
                     editarInstrucciones(Array.isArray(instrucciones) ? instrucciones : [instrucciones], id);
@@ -141,9 +141,11 @@ const eliminarReceta = async(req, res, next) => {
     })
     .then( () => {
         eliminarIngredientes(id);
-        eliminarInstrucciones(id);
-
-        console.log('Receta Eliminada');
+        eliminarInstrucciones(id);            
+        
+        res.render('eliminar_receta', {
+            pagina: 'Eliminar receta'
+        });
     });
 }
 

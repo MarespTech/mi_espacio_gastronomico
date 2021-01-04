@@ -68,9 +68,14 @@ function eliminarReceta(e) {
       let url = `/eliminar_receta/${id}`;
       let xmlhttp = new XMLHttpRequest();
 
+      xmlhttp.onreadystatechange = function() {
+        if(this.readyState == 4 & this.status == 200) {
+          window.location.href = '/';
+        }
+      }
+
       xmlhttp.open("GET", url, true);
       xmlhttp.send();
-      window.location.href = '/';
     }
   });
 }
