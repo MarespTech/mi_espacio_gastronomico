@@ -1,9 +1,6 @@
 import { Ingredientes } from '../models/Ingredientes.js';
 
 const guardarIngredientes = (ingredientes, receta_id) => {
-    console.log(ingredientes);
-    console.log(receta_id);
-
     ingredientes.forEach(async(ingrediente) => {
         if(ingrediente.trim() != "") {
             try {
@@ -19,9 +16,6 @@ const guardarIngredientes = (ingredientes, receta_id) => {
 }
 
 const editarIngredientes = async(ingredientes, receta_id) => {
-    console.log(ingredientes);
-    console.log(receta_id);
-
     await Ingredientes.destroy({
         where: {
             receta_id
