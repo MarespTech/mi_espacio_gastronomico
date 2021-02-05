@@ -43,7 +43,7 @@ function agregar_instrucciones(e) {
   let item = document.createElement('li');
   item.innerHTML = `
     <div class="input-field">
-      <input class="instrucciones" type="text" name="instrucciones" id="instrucciones">
+      <textarea class="instrucciones materialize-textarea" type="text" name="instrucciones" id="instrucciones"></textarea>
       <label for="instrucciones">Instruccion</label>
     </div>
   `;
