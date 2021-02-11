@@ -77,9 +77,6 @@ const editarReceta = async(req, res, next) => {
     const file = req.file;
     const errores = [];
 
-    console.log(req.body)
-    console.log(file);
-
     let principal_picture = file ? `uploads/${file.filename}` : actual_picture;
 
     if(name_recipe.trim() === "") errores.push({ mensaje: 'El nombre de la receta esta vacio'});
@@ -101,7 +98,7 @@ const editarReceta = async(req, res, next) => {
         });
     } 
     else {
-        let url_recipe = name_recipe.replaceAll(" ", "-");
+        let url_recipe = name_recipe.replace(/\s/gi, "-");
         try {
             await Recipes.update({
                 name_recipe, 
@@ -143,8 +140,9 @@ const eliminarReceta = async(req, res, next) => {
         eliminarIngredientes(id);
         eliminarInstrucciones(id);            
         
-        res.render('eliminar_receta', {
-            pagina: 'Eliminar receta'
+        res.json({
+            ok: true,
+            message: "Receta eliminada con exito"
         });
     });
 }

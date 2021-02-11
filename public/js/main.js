@@ -70,7 +70,13 @@ function eliminarReceta(e) {
 
       xmlhttp.onreadystatechange = function() {
         if(this.readyState == 4 & this.status == 200) {
-          window.location.href = '/';
+          let data = JSON.parse(this.responseText);
+          if(data.ok) {
+            swal({title: data.message, icon: "success"})
+              .then((value) => {
+                window.location.href = '/';
+              });
+          }
         }
       }
 
