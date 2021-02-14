@@ -60,7 +60,7 @@ block contenido
                                 each instruccion in instrucciones
                                     li
                                         .input-field
-                                            input.instrucciones(type="text", name="instrucciones", id=`instrucciones`, value=instruccion)
+                                            textarea.instrucciones.materialize-textarea(type="text", name="instrucciones", id=`instrucciones`)= instruccion
                                             label(for=`instrucciones`) Instruccion
 
 

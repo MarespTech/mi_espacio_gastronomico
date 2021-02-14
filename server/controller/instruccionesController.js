@@ -1,9 +1,6 @@
 import { Instrucciones } from '../models/Instrucciones.js';
 
 const guardarInstrucciones = (instrucciones, receta_id) => {
-    console.log(instrucciones);
-    console.log(receta_id);
-
     instrucciones.forEach(async(instruccion) => {
         if(instruccion.trim() != "") {
             try {
@@ -19,9 +16,6 @@ const guardarInstrucciones = (instrucciones, receta_id) => {
 }
 
 const editarInstrucciones = async(instrucciones, receta_id) => {
-    console.log(instrucciones);
-    console.log(receta_id);
-
     await Instrucciones.destroy({
         where: {
             receta_id

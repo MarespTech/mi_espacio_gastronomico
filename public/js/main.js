@@ -43,7 +43,7 @@ function agregar_instrucciones(e) {
   let item = document.createElement('li');
   item.innerHTML = `
     <div class="input-field">
-      <input class="instrucciones" type="text" name="instrucciones" id="instrucciones">
+      <textarea class="instrucciones materialize-textarea" type="text" name="instrucciones" id="instrucciones"></textarea>
       <label for="instrucciones">Instruccion</label>
     </div>
   `;
@@ -68,9 +68,20 @@ function eliminarReceta(e) {
       let url = `/eliminar_receta/${id}`;
       let xmlhttp = new XMLHttpRequest();
 
+      xmlhttp.onreadystatechange = function() {
+        if(this.readyState == 4 & this.status == 200) {
+          let data = JSON.parse(this.responseText);
+          if(data.ok) {
+            swal({title: data.message, icon: "success"})
+              .then((value) => {
+                window.location.href = '/';
+              });
+          }
+        }
+      }
+
       xmlhttp.open("GET", url, true);
       xmlhttp.send();
-      window.location.href = '/';
     }
   });
 }

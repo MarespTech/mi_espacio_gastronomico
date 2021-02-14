@@ -16,8 +16,8 @@ const guardarReceta = async(req, res, next) => {
     const file = req.file;
     const errores = [];
 
-    console.log(req.body)
-    console.log(file);
+    // console.log(req.body)
+    // console.log(file);
 
     let principal_picture = file ? `uploads/${file.filename}` : 'public/uploads/no-image.jpeg';
 
@@ -25,7 +25,7 @@ const guardarReceta = async(req, res, next) => {
     if(sender_name.trim() === "") errores.push({ mensaje: 'Su nombre esta vacio'});
     if(sender_last_name.trim() === "") errores.push({ mensaje: 'Su apellido esta vacio'});
     if(sender_email.trim() === "") errores.push({ mensaje: 'Su correo electronico esta vacio'});
-    if(description_recipe.trim() === "") errores.push({ mensaje: 'Las instrucciones estan vacio'});
+    if(description_recipe.trim() === "") errores.push({ mensaje: 'La descripcion esta vacia'});
 
     if( errores.length > 0 ) {
         // Mostrar formulario con errores
@@ -39,12 +39,12 @@ const guardarReceta = async(req, res, next) => {
             description_recipe, 
             difficult_recipe,
             principal_picture,
-            ingredientes,
-            instrucciones
+            ingredientes: Array.isArray(ingredientes) ? ingredientes : [ingredientes],
+            instrucciones: Array.isArray(instrucciones) ? instrucciones : [instrucciones]
         });
     } 
     else {
-        let url_recipe = name_recipe.replaceAll(" ", "-");
+        let url_recipe = name_recipe.replace(/\s/gi, "-");
         try {
             await Recipes.create({
                 name_recipe, 
@@ -58,8 +58,8 @@ const guardarReceta = async(req, res, next) => {
             })
             .then(result => 
                 {
-                    guardarIngredientes(ingredientes, result.dataValues.id);
-                    guardarInstrucciones(instrucciones, result.dataValues.id);
+                    guardarIngredientes(Array.isArray(ingredientes) ? ingredientes : [ingredientes], result.dataValues.id);
+                    guardarInstrucciones(Array.isArray(instrucciones) ? instrucciones : [instrucciones], result.dataValues.id);
                 });
 
             res.redirect('/');
@@ -76,16 +76,13 @@ const editarReceta = async(req, res, next) => {
     const file = req.file;
     const errores = [];
 
-    console.log(req.body)
-    console.log(file);
-
     let principal_picture = file ? `uploads/${file.filename}` : actual_picture;
 
     if(name_recipe.trim() === "") errores.push({ mensaje: 'El nombre de la receta esta vacio'});
     if(sender_name.trim() === "") errores.push({ mensaje: 'Su nombre esta vacio'});
     if(sender_last_name.trim() === "") errores.push({ mensaje: 'Su apellido esta vacio'});
     if(sender_email.trim() === "") errores.push({ mensaje: 'Su correo electronico esta vacio'});
-    if(description_recipe.trim() === "") errores.push({ mensaje: 'Las instrucciones estan vacio'});
+    if(description_recipe.trim() === "") errores.push({ mensaje: 'La descripcion esta vacia'});
 
     if( errores.length > 0 ) {
         const receta = { id, name_recipe, sender_name, sender_last_name, sender_email, description_recipe, difficult_recipe, principal_picture, url_recipe };
@@ -100,7 +97,7 @@ const editarReceta = async(req, res, next) => {
         });
     } 
     else {
-        let url_recipe = name_recipe.replaceAll(" ", "-");
+        let url_recipe = name_recipe.replace(/\s/gi, "-");
         try {
             await Recipes.update({
                 name_recipe, 
@@ -117,7 +114,7 @@ const editarReceta = async(req, res, next) => {
                     id
                 }
             })
-            .then(result => 
+            .then(() => 
                 {
                     editarIngredientes(Array.isArray(ingredientes) ? ingredientes : [ingredientes], id);
                     editarInstrucciones(Array.isArray(instrucciones) ? instrucciones : [instrucciones], id);
@@ -140,9 +137,12 @@ const eliminarReceta = async(req, res, next) => {
     })
     .then( () => {
         eliminarIngredientes(id);
-        eliminarInstrucciones(id);
-
-        console.log('Receta Eliminada');
+        eliminarInstrucciones(id);            
+        
+        res.json({
+            ok: true,
+            message: "Receta eliminada con exito"
+        });
     });
 }
 
