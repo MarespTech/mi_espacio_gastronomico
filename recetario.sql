@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2021 at 11:44 PM
+-- Generation Time: Feb 15, 2021 at 12:24 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -89,17 +89,16 @@ CREATE TABLE `recetas` (
   `sender_email` varchar(150) DEFAULT NULL,
   `description_recipe` text DEFAULT NULL,
   `principal_picture` text DEFAULT NULL,
-  `url_recipe` text DEFAULT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `url_recipe` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `recetas`
 --
 
-INSERT INTO `recetas` (`id`, `name_recipe`, `difficult_recipe`, `sender_name`, `sender_last_name`, `sender_email`, `description_recipe`, `principal_picture`, `url_recipe`, `date`) VALUES
-(15, 'Filete Mignon', 'Intermediario', 'Martin Mateo', 'Gómez', 'martin.m.espericueta@gmail.com', 'Descripcion', 'uploads/1609200260358_unnamed.gif', 'Filete-Mignon', '2020-12-29 00:04:20'),
-(16, 'Chilaquiles Verdes', 'Facil', 'Martin', 'Espericueta', 'martin@gmail.com', 'Chilaquiles Mexicanos caseros', 'uploads/1613278386262_descarga.jpg', 'Chilaquiles-Verdes', '2021-02-14 04:53:06');
+INSERT INTO `recetas` (`id`, `name_recipe`, `difficult_recipe`, `sender_name`, `sender_last_name`, `sender_email`, `description_recipe`, `principal_picture`, `url_recipe`) VALUES
+(15, 'Filete Mignon', 'Intermediario', 'Martin Mateo', 'Gómez', 'martin.m.espericueta@gmail.com', 'Descripcion', 'uploads/1609200260358_unnamed.gif', 'Filete-Mignon'),
+(16, 'Chilaquiles Verdes', 'Facil', 'Martin', 'Espericueta', 'martin@gmail.com', 'Chilaquiles Mexicanos caseros', 'uploads/1613278386262_descarga.jpg', 'Chilaquiles-Verdes');
 
 --
 -- Indexes for dumped tables

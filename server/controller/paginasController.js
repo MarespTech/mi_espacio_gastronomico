@@ -3,12 +3,18 @@ import { Ingredientes } from '../models/Ingredientes.js';
 import { Instrucciones } from '../models/Instrucciones.js';
 
 const paginaInicio = async(req, res) => {
-    const recetas = await Recipes.findAll();
+    
+    try {
+        const recetas = await Recipes.findAll();
+        res.render('recetas', {
+            pagina: 'Inicio',
+            recetas
+        });
+    
+    } catch (error) {
+        console.log(error);
+    }
 
-    res.render('recetas', {
-        pagina: 'Inicio',
-        recetas
-    });
 }
 
 const paginaReceta = async(req, res) => {
