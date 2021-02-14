@@ -9,7 +9,6 @@ import {
     editarInstrucciones,
     eliminarInstrucciones
 } from '../controller/instruccionesController.js';
-import swal from 'sweetalert';
 
 const guardarReceta = async(req, res, next) => {
 
