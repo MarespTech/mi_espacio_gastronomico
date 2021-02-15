@@ -4,6 +4,12 @@ import db from './config/db.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
+console.log(`BD nombre: ${process.env.DB_NOMBRE}`);
+console.log(`Usuario: ${process.env.DB_USER}`);
+console.log(`Password: ${process.env.DB_PASS}`);
+console.log(`BD Host: ${process.env.DB_HOST}`);
+console.log(`BD PORT: ${process.env.DB_PORT}`);
+
 const app = express();
 
 // Conectar la base de datos
