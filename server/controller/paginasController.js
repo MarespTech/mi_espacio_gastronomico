@@ -51,22 +51,16 @@ const paginaEditarReceta = async(req, res) => {
 
     try {
         const receta = await Recipes.findOne({ where: { url_recipe: url }});
-
+        
         promiseDB.push(Ingredientes.findAll({
-                attributes: ['ingrediente']
-            },
-            { 
+                attributes: ['ingrediente'],
                 where: {receta_id: receta.id}
-            }
-        ));
+            }));
 
         promiseDB.push(Instrucciones.findAll({
-                attributes: ['instruccion']
-            },
-            {  
+                attributes: ['instruccion'],
                 where: {receta_id: receta.id}
-            }
-        ));
+            }));
         const resultado = await Promise.all(promiseDB);   
         
         const ingredientes = [];
@@ -75,7 +69,7 @@ const paginaEditarReceta = async(req, res) => {
         resultado[0].forEach(element => {
             ingredientes.push(element.ingrediente);
         });
-
+        
         resultado[1].forEach(element => {
             instrucciones.push(element.instruccion);
         });
