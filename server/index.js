@@ -2,13 +2,16 @@ import express from 'express';
 import router from './routes/index.js';
 import db from './config/db.js';
 import dotenv from 'dotenv';
-dotenv.config();
 
-console.log(`BD nombre: ${process.env.DB_NOMBRE}`);
-console.log(`Usuario: ${process.env.DB_USER}`);
-console.log(`Password: ${process.env.DB_PASS}`);
-console.log(`BD Host: ${process.env.DB_HOST}`);
-console.log(`BD PORT: ${process.env.DB_PORT}`);
+const result = dotenv.config();
+const envs = result.parsed;
+console.log(envs);
+
+console.log(`BD nombre: ${envs.DB_NOMBRE}`);
+console.log(`Usuario: ${envs.DB_USER}`);
+console.log(`Password: ${envs.DB_PASS}`);
+console.log(`BD Host: ${envs.DB_HOST}`);
+console.log(`BD PORT: ${envs.DB_PORT}`);
 
 const app = express();
 
@@ -19,7 +22,7 @@ db.authenticate()
 
 // Definir puerto
 // const host = process.env.HOST || '0.0.0.0';
-const port = process.env.PORT || 3000;
+const port = envs.PORT || 3000;
 
 // Habilitar PUG
 app.set('view engine', 'pug');
